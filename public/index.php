@@ -1,12 +1,12 @@
 <?php
 
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 
 use Phalcon\Mvc\Application;
 use Phalcon\Config\Adapter\Ini as ConfigIni;
 
-//$_GET['_url'] = '/contact/send';
-//$_SERVER['REQUEST_METHOD'] = 'POST';
 
 try {
 
@@ -25,12 +25,22 @@ try {
 	/**
 	 * Load application services
 	 */
-	require APP_PATH . 'app/config/services.php';
+    require APP_PATH . 'app/Bootstrap.php';
 
+
+    /**
+     * Handle the request
+     */
 	$application = new Application($di);
+    /**
+     * Include modules
+     */
+    require __DIR__ . '/../app/config/modules.php';
 
 	echo $application->handle()->getContent();
 
-} catch (Exception $e){
-	echo $e->getMessage();
+} catch (Phalcon\Exception $e) {
+    echo $e->getMessage();
+} catch (PDOException $e) {
+    echo $e->getMessage();
 }

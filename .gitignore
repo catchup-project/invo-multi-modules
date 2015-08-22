@@ -1,9 +1,11 @@
 app/config/config.ini*
+app/config/config.php*
 cache/volt/*.php
 .DS_Store*
 ehthumbs.db
 Icon?
 Thumbs.db
+.svn
 .project
 .settings
 .buildpath
